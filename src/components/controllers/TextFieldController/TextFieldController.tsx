@@ -1,0 +1,50 @@
+import { FieldValues, Path, Control, Controller } from 'react-hook-form';
+import { TextFieldProps, TextField } from '@mui/material';
+
+type Props<T extends FieldValues> = Omit<TextFieldProps, 'name'> & {
+  control: Control<T, object>;
+  disableErrorSpace?: boolean;
+  name: Path<T>;
+  maxLength?: number;
+};
+
+const TextFieldController = <T extends FieldValues>({
+  control,
+  disableErrorSpace,
+  name,
+  required,
+  label,
+  maxLength = 50,
+  sx,
+  ...restProps
+}: Props<T>) => {
+  return (
+    <Controller
+      render={({ field: { ref, ...restField }, fieldState: { error } }) => (
+        <TextField
+          {...restField}
+          {...restProps}
+          inputRef={ref}
+          error={!!error}
+          label={label}
+          helperText={error?.message || (disableErrorSpace ? '' : ' ')}
+          inputProps={{
+            maxLength,
+          }}
+          fullWidth
+          sx={{
+            width: '25px',
+            ...sx,
+          }}
+        />
+      )}
+      name={name}
+      control={control}
+      rules={{
+        required: required ? 'Required' : '',
+      }}
+    />
+  );
+};
+
+export default TextFieldController;
