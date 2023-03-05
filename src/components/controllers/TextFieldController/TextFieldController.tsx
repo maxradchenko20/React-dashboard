@@ -1,5 +1,5 @@
-import { FieldValues, Path, Control, Controller } from 'react-hook-form';
-import { TextFieldProps, TextField } from '@mui/material';
+import { TextField, TextFieldProps } from '@mui/material';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 
 type Props<T extends FieldValues> = Omit<TextFieldProps, 'name'> & {
   control: Control<T, object>;
@@ -27,13 +27,15 @@ const TextFieldController = <T extends FieldValues>({
           inputRef={ref}
           error={!!error}
           label={label}
-          helperText={error?.message || (disableErrorSpace ? '' : ' ')}
+          // helperText={error?.message || (disableErrorSpace ? '' : ' ')}
           inputProps={{
             maxLength,
           }}
           fullWidth
           sx={{
-            width: '25px',
+            width: '250px',
+            borderRadius: '8px',
+            color: 'red',
             ...sx,
           }}
         />

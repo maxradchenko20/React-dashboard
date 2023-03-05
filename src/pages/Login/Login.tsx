@@ -1,16 +1,17 @@
-import { Button, Grid, Link, Typography } from "@mui/material";
-import { FC } from "react";
-import TextFieldController from "../../components/controllers/TextFieldController";
-import { useLoginForm } from "./useLoginForm";
-import { useNavigate } from "react-router-dom";
+import { Button, Grid, Link, Typography } from '@mui/material';
+import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import TextFieldController from '../../components/controllers/TextFieldController';
+import { useLoginForm } from './useLoginForm';
 
 const Login: FC = () => {
-  const title = "Log in";
+  const title = 'Log in';
   const navigate = useNavigate();
 
   const { form, handleSubmit } = useLoginForm();
 
-  const navigateToRegisterPage = () => navigate("/register");
+  const navigateToRegisterPage = () => navigate('/register');
 
   return (
     <form onSubmit={handleSubmit}>
@@ -23,7 +24,7 @@ const Login: FC = () => {
             control={form.control}
             name="email"
             placeholder="example@gmail.com"
-            sx={{ width: "inherit" }}
+            sx={{ width: 'inherit' }}
           />
         </Grid>
         <Grid item width="inherit">
@@ -31,7 +32,7 @@ const Login: FC = () => {
             control={form.control}
             name="password"
             placeholder="your password"
-            sx={{ width: "inherit" }}
+            sx={{ width: 'inherit' }}
             type="password"
           />
         </Grid>
@@ -48,7 +49,7 @@ const Login: FC = () => {
             <Link
               component="button"
               underline="none"
-              className="!pl-1 font-medium hover:cursor-pointer hover:text-red"
+              className="hover:text-red !pl-1 font-medium hover:cursor-pointer"
               onClick={navigateToRegisterPage}
             >
               Register

@@ -1,13 +1,13 @@
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useForm, SubmitHandler } from 'react-hook-form';
+
 import { ROUTES } from '@/config/routes';
+import { handleShowErrAlert } from '@/utils/handleShowErrAlert';
 import { handleShowSuccessSessionAlert } from '@/utils/handleShowSuccessSessionAlert';
 import { SessionTypeEnum } from '@/utils/types';
-import { handleShowErrAlert } from '@/utils/handleShowErrAlert';
 
 import { RegisterType } from './types';
 import { useApi } from './useApi';
-import { AxiosError } from 'axios';
 
 const defaultValue = {
   firstName: '',

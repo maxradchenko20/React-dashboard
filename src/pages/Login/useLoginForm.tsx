@@ -1,11 +1,15 @@
-import { useApi } from './useApi';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { LoginType } from '@/pages/Login/types';
-import { useForm, SubmitHandler } from 'react-hook-form';
+
 import { ROUTES } from '@/config/routes';
+import { useAuthContext } from '@/context/AuthContext';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { LoginType } from '@/pages/Login/types';
+import { handleShowErrAlert } from '@/utils/handleShowErrAlert';
 import { handleShowSuccessSessionAlert } from '@/utils/handleShowSuccessSessionAlert';
 import { SessionTypeEnum } from '@/utils/types';
-import { handleShowErrAlert } from '@/utils/handleShowErrAlert';
+
+import { useApi } from './useApi';
 
 const defaultValue = {
   email: '',
@@ -15,6 +19,9 @@ const defaultValue = {
 export const useLoginForm = () => {
   const { loginMutation } = useApi();
   const navigate = useNavigate();
+  const { handleAuthentication } = useAuthContext();
+  const { setStorageItem } = useLocalStorage();
+
   const form = useForm<LoginType>({ defaultValues: defaultValue });
 
   const redirectToMain = () => navigate(ROUTES.MAIN_PAGE);
@@ -26,7 +33,9 @@ export const useLoginForm = () => {
         password: data.password,
       },
       {
-        onSuccess: () => {
+        onSuccess: (data) => {
+          handleAuthentication(data.data);
+          setStorageItem('isAuthenticated', true);
           handleShowSuccessSessionAlert(SessionTypeEnum.LOGIN);
           redirectToMain();
         },
