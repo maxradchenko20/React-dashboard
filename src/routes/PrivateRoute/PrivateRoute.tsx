@@ -9,6 +9,7 @@ const PrivateRoute = () => {
   const { isAuthenticated } = useAuthContext();
   const isAuth = getStorageItem('isAuthenticated');
 
+  //TODO REFACTORING AFTER
   useEffect(() => {
     if (!isAuthenticated) {
       removeStorageItem('isAuthenticated');

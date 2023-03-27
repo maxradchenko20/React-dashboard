@@ -14,6 +14,7 @@ export type AuthContext = {
 const authContext = createContext<AuthContext>({
   user: null,
   isAuthenticated: false,
+
   handleAuthentication: noop,
   logOut: noop,
 });
